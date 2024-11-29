@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Font style from google */
+    body {
+    font-family: "Roboto Serif", serif;
+    }

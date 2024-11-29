@@ -8,17 +8,41 @@
     <meta name="author" content="Krishna Kawa">
     <title>Weatherly</title>
     <link href="output.css" rel="stylesheet">
+    <!-- font  from google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 </head>
 
-<body class="m-0 p-2 box-border bg-slate-500 grid grid-cols-7 grid-rows-7 gap-4 h-screen">
+<body class="m-0 p-2 box-border bg-slate-500 
+        grid grid-cols-7 grid-rows-7 gap-4 
+        h-screen">
 
 
-    <header class="col-span-7 bg-pink-400">
-        <h1 class="text-red-600">Weatherly</h1>
+    <header class="col-span-7 bg-pink-400 p-5">
+        <h1 class="font-bold text-5xl flex justify-center items-center">Weatherly</h1>
     </header>
 
-    <section id="searchBox" class="col-span-2 row-span-6 row-start-2 bg-red-400">2</section>
+<!-- left section for search bar  -->
+    <section id="searchBox" class="col-span-2 row-span-6 row-start-2 bg-red-400 p-5">
+        <form>
+            <label for="location">Enter your Location </label><br>
+            <input id="location" type="text"><br>
+            <button class="p-2 my-2  bg-white"> Submit </button>
+            <hr>
+            <button id="trackLocation" class="p-2 my-2  bg-white"> Track Your Location</button>
+            <p id="coordinates"> latitude <br> longitude </p>
+        </form>
+    </section>
+
+<!-- right box top for display -->
     <section id="displayBox" class="col-span-5 row-span-3 col-start-3 row-start-2 bg-blue-500">3</section>
+
+<!-- right box below for display of n days -->
     <section id="displayBox2" class="col-span-5 row-span-3 col-start-3 row-start-5 bg-green-200">4</section>
+
+
+
+<script src="app.js"></script>
 </body>
 </html>
