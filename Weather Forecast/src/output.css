@@ -590,14 +590,6 @@ video {
   margin: 0px;
 }
 
-.m-1 {
-  margin: 0.25rem;
-}
-
-.m-2 {
-  margin: 0.5rem;
-}
-
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -617,10 +609,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .grid-cols-7 {
@@ -679,10 +667,6 @@ video {
 
 .p-5 {
   padding: 1.25rem;
-}
-
-.p-1 {
-  padding: 0.25rem;
 }
 
 .text-5xl {
