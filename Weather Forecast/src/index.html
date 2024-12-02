@@ -14,33 +14,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 </head>
 
-<body class="m-0 p-2 box-border bg-slate-500 
+<body   style="background-color: black;"
+        class="m-0 p-2 box-border
         grid grid-cols-7 grid-rows-7 gap-4 
         h-screen">
 
 
-    <header class="col-span-7 bg-pink-400 p-5">
+    <header  style="background-color: beige;"
+            class="rounded-lg col-span-7  p-5 ">
         <h1 class="font-bold text-5xl flex justify-center items-center">Weatherly</h1>
     </header>
 
 <!-- left section for search bar  -->
-    <section id="searchBox" class="col-span-2 row-span-6 row-start-2 bg-red-400 p-5">
-        <form>
-            <label for="location">Enter your Location </label><br>
-            <input id="location" type="text" placeholder="ex:Mumbai,Banglore"><br>
-            <button id="submit" type="button" class="p-2 my-2  bg-white"> Submit </button>
-            <hr>
-            <button id="trackLocation" class="p-2 my-2  bg-white"> Track Your Location</button>
-            
+    <section id="searchBox" 
+    style="background-color: beige;" 
+    class="rounded-lg col-span-2 row-span-6 row-start-2  p-5 ">
+        <form class="flex flex-col my-16">
+            <label class="text-2xl " for="location">Enter your Location </label><br>
 
+            <input 
+            class="p-2 w-96 "
+            id="location" type="text" placeholder="ex:Mumbai,Bengaluru"><br>
+            
+            <button id="submit" type="button"
+            class="p-2 my-2  bg-white "> Submit </button>
+            <hr>
+            <button id="trackLocation " class="p-2 my-2  bg-white"> Track Your Location</button>
+            
         </form>
+
+        <div id="coordinates"></div>
     </section>
 
 <!-- right box top for display -->
-    <section id="displayBox" class="col-span-5 row-span-3 col-start-3 row-start-2 bg-blue-500">3</section>
+    <section id="displayBox" style="background-color: beige;" class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-2 ">3</section>
 
 <!-- right box below for display of n days -->
-    <section id="displayBox2" class="col-span-5 row-span-3 col-start-3 row-start-5 bg-green-200">4</section>
+    <section id="displayBox2" style="background-color: beige;" 
+    class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-5 flex items-center gap-5 p-5" >
+        <div class="h-full bg-white w-full rounded-2xl ">1</div>
+        <div class="h-full bg-white w-full rounded-2xl ">2</div>
+        <div class="h-full bg-white w-full rounded-2xl ">3</div>
+        <div class="h-full bg-white w-full rounded-2xl ">4</div>
+        <div class="h-full bg-white w-full rounded-2xl ">5</div>
+    </section>
 
 
 
