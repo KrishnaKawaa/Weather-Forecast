@@ -1,67 +1,95 @@
-const apiKey = `efb3ce4708fc7524b90ade945d19313f`;
-const displayBox= document.getElementById("displayBox");
-const coordinates=document.getElementById("coordinates");
+    const apiKey = `efb3ce4708fc7524b90ade945d19313f`;
+    const displayBox = document.getElementById("displayBox");
+    const coordinates = document.getElementById("coordinates");
+    const displayBox2 = document.getElementById("displayBox2"); // New section for 5 days
 
-// Adding Event lisitner on the form to capture Input 
+    // Adding Event listener on the form to capture Input
+    const form = document.querySelector("form");
+    form.addEventListener("submit", () => {
+    event.preventDefault(); // To prevent the page from reloading after submit
+    const city = document.getElementById("location").value.trim(); // Store the input value
 
-const form = document.querySelector("form")
-form.addEventListener("submit",()=>{
-    event.preventDefault()//to prevent the page to reload after submit
-    const city = document.getElementById("location").value.trim();//store the input value
-
-    if(!city){
-        displayBox.textContent= "Please enter a city name";
-        console.log(city);
-        displayBox.textContent= "";
-        return ;
+    if (!city) {
+        displayBox.textContent = "Please enter a city name";
+        return;
     }
 
-    // Current Weather API 
+    // Current Weather API URL
     const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    // fetching data from url
+
+    // Fetching current weather data
     fetch(urlCurrent)
-    .then((response)=>{//checking if the http status code indicates success
+        .then((response) => {
         if (!response.ok) throw new Error("City not found");
         return response.json();
-    })
-    .then((data)=>{//Data -> Json format -> Display data
+        })
+        .then((data) => {
         const { main, weather, name, coord, wind } = data;
         const temperature = main.temp;
-        const humidity =main.humidity;
+        const humidity = main.humidity;
         const description = weather[0].description;
         const longitude = coord.lon;
-        const latitude =coord.lat;
-        const windSpeed =wind.speed;
-        displayBox.innerHTML=`
+        const latitude = coord.lat;
+        const windSpeed = wind.speed;
+
+        displayBox.innerHTML = `
             <p><strong>City:</strong> ${name}</p>
             <p><strong>Temperature:</strong> ${temperature}°C</p>
             <p><strong>Humidity:</strong> ${humidity}%</p>
             <p><strong>Description:</strong> ${description}</p>
-            <p><strong>Wind:</strong>${windSpeed}</p>
-            `;
-        coordinates.innerHTML=`
-        <p><strong>Coordinates</strong></p>
-        <p>Longitude:${coord.lon}</p>
-        <p>Latitude:${coord.lat}</p>
+            <p><strong>Wind:</strong> ${windSpeed} m/s</p>
         `;
+        coordinates.innerHTML = `
+            <p><strong>Coordinates</strong></p>
+            <p>Longitude: ${coord.lon}</p>
+            <p>Latitude: ${coord.lat}</p>
+        `;
+
+        // Fetching 5-day forecast data
+        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+        fetch(urlForecast)
+            .then((response) => {
+            if (!response.ok) throw new Error("Unable to fetch forecast data");
+            return response.json();
+            })
+            .then((forecastData) => {
+            const forecastDivs = displayBox2.querySelectorAll("div");
+            // Loop through 5 forecast intervals (3 hours apart)
+            for (let i = 0; i < 5; i++) {
+                const forecast = forecastData.list[i * 8]; // 8 data points per day (every 3 hours)
+                const { main, weather, dt_txt } = forecast;
+                const date = new Date(dt_txt).toLocaleDateString();
+                const temp = main.temp;
+                const description = weather[0].description;
+
+                // Display forecast in respective div
+                forecastDivs[i].innerHTML = `
+                <p><strong>${date}</strong></p>
+                <p><strong>Temp:</strong> ${temp}°C</p>
+                <p><strong>Description:</strong> ${description}</p>
+                `;
+            }
+            })
+            .catch((error) => {
+            console.error(error);
+            displayBox2.innerHTML = "<p>Unable to fetch forecast data.</p>";
+            });
         })
         .catch((error) => {
-            displayBox.textContent = error.message;
-            displayBox2.textContent = ""; // Clear forecast display
-            coordinates.innerHTML="";
+        displayBox.textContent = error.message;
+        coordinates.innerHTML = "";
+        displayBox2.innerHTML = ""; // Clear forecast display
         });
-})
+    });
 
+    //---------------------Tracking User location---------------------------------------------------------------------------
+    // Select elements for tracking
+    const trackButton = document.getElementById("trackLocation");
+    const display = document.getElementById("display");
 
-
-//---------------------Tracking User location---------------------------------------------------------------------------
-// Select elements for tracking
-const trackButton = document.getElementById("trackLocation");
-const display = document.getElementById("display");
-
-// Function to get and display the location and weather data
+    // Function to get and display the location and weather data
     function getLocation() {
-        displayBox.innerHTML = "";
+    displayBox.innerHTML = "";
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -76,7 +104,7 @@ const display = document.getElementById("display");
             `;
 
             // Fetch weather data based on coordinates 
-            const urlTrack = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+            const urlTrack = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
             fetch(urlTrack)
             .then((response) => {
@@ -93,13 +121,43 @@ const display = document.getElementById("display");
                 const windSpeed = wind.speed;
 
                 // Display weather data
-                displayBox.innerHTML += `
+                displayBox.innerHTML = `
                 <p><strong>City:</strong> ${name}</p>
                 <p><strong>Temperature:</strong> ${temperature}°C</p>
                 <p><strong>Humidity:</strong> ${humidity}%</p>
                 <p><strong>Description:</strong> ${description}</p>
                 <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
                 `;
+
+                // Fetching 5-day forecast data based on coordinates
+                const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+                fetch(urlForecast)
+                .then((response) => {
+                    if (!response.ok) throw new Error("Unable to fetch forecast data");
+                    return response.json();
+                })
+                .then((forecastData) => {
+                    const forecastDivs = displayBox2.querySelectorAll("div");
+                    // Loop through 5 forecast intervals (3 hours apart)
+                    for (let i = 0; i < 5; i++) {
+                    const forecast = forecastData.list[i * 8]; // 8 data points per day (every 3 hours)
+                    const { main, weather, dt_txt } = forecast;
+                    const date = new Date(dt_txt).toLocaleDateString();
+                    const temp = main.temp;
+                    const description = weather[0].description;
+
+                    // Display forecast in respective div
+                    forecastDivs[i].innerHTML = `
+                        <p><strong>${date}</strong></p>
+                        <p><strong>Temp:</strong> ${temp}°C</p>
+                        <p><strong>Description:</strong> ${description}</p>
+                    `;
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    displayBox2.innerHTML = "<p>Unable to fetch forecast data.</p>";
+                });
             })
             .catch((error) => {
                 display.innerHTML += `<p>Error: ${error.message}</p>`;
@@ -126,5 +184,5 @@ const display = document.getElementById("display");
     }
     }
 
-// Attaching event listener to the button
-trackButton.addEventListener("click", getLocation);
+    // Attaching event listener to the button
+    trackButton.addEventListener("click", getLocation);
