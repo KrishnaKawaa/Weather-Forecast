@@ -19,7 +19,17 @@
         class="m-0 p-2 box-border
         grid grid-cols-7 grid-rows-7 gap-4 
         h-screen
-        sm:flex sm:flex-col lg:grid">
+        xl:grid 
+        lg:grid
+        md:flex
+        sm:flex sm:flex-col
+        min-[320px]:flex min-[320px]:flex-col
+        ">
+        <!-- xl => for larger dektop
+            lg  => for desktop
+            md  => ipad mini
+            sm and 320px x 640px => iphone se
+            -->
 
 
     <header  style="background-color: beige;"
@@ -59,7 +69,12 @@
     
 <!-- right box below for display of n days -->
     <section id="displayBox2" style="background-color: beige;" 
-    class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-5 flex items-center gap-2 p-5
+    class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-5 flex items-center gap-2 p-5 
+        xl:flex 
+        lg:flex
+        md:flex 
+        sm:flex
+        max-[640px]:flex-col 
     " >
         <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>
         <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>

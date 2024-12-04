@@ -77,7 +77,7 @@ form.addEventListener("submit", () => {
                             <p><strong>Temp:</strong> ${temp}°C</p>
                             <p><strong>Humidity:</strong> ${humidity}%</p>
                             <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
-                            <img  src="${iconUrl}" alt="${description}" class=" w-5 h-5 m-0 ">
+                            <img  src="${iconUrl}" alt="${description}" >
                             <p><strong>Description:</strong> ${description}</p>
 
                         `;
@@ -133,15 +133,19 @@ form.addEventListener("submit", () => {
                 const humidity = main.humidity;
                 const description = weather[0].description;
                 const windSpeed = wind.speed;
+                const icon=weather[0].icon;//weather icon id
+            const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`; // Construct the image URL
+
 
                 // Display weather data
                 displayBox.innerHTML = `
                 <p><strong>City:</strong> ${name}</p>
                 <p><strong>Temperature:</strong> ${temperature}°C</p>
                 <p><strong>Humidity:</strong> ${humidity}%</p>
-                <p><strong>Description:</strong> ${description}</p>
                 <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
                 `;
+                image.innerHTML=`<img class="h-40 w-40" src="${iconUrl}" alt="${description}" >
+                <p><strong>Description:</strong> ${description}</p>`
 
 
                 // Fetching 5-day forecast data based on coordinates
@@ -162,14 +166,17 @@ form.addEventListener("submit", () => {
                         const humidity = main.humidity;
                         const description = weather[0].description;
                         const windSpeed = wind.speed;
+                        const icon=weather[0].icon;//weather icon id
+            const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`; // Construct the image URL
 
                         // Display forecast in respective div
                         forecastDivs[i].innerHTML = `
                             <p><strong>${date}</strong></p>
                             <p><strong>Temp:</strong> ${temp}°C</p>
-                            <p><strong>Description:</strong> ${description}</p>
                             <p><strong>Humidity:</strong> ${humidity}%</p>
                             <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
+                            <img  src="${iconUrl}" alt="${description}" >
+                            <p><strong>Description:</strong> ${description}</p>
                         `;
                     }
                 })

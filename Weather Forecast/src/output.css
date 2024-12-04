@@ -623,6 +623,14 @@ video {
   height: 100vh;
 }
 
+.h-9 {
+  height: 2.25rem;
+}
+
+.h-96 {
+  height: 24rem;
+}
+
 .w-40 {
   width: 10rem;
 }
@@ -633,10 +641,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.flex-shrink-0 {
-  flex-shrink: 0;
 }
 
 .grid-cols-2 {
@@ -800,6 +804,26 @@ body {
   background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));
 }
 
+@media (max-width: 640px) {
+  .max-\[640px\]\:flex {
+    display: flex;
+  }
+
+  .max-\[640px\]\:flex-col {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 320px) {
+  .min-\[320px\]\:flex {
+    display: flex;
+  }
+
+  .min-\[320px\]\:flex-col {
+    flex-direction: column;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:flex {
     display: flex;
@@ -810,12 +834,44 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
-  .lg\:grid {
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:grid {
     display: grid;
   }
 
-  .lg\:flex-row {
+  .md\:w-40 {
+    width: 10rem;
+  }
+
+  .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:overflow-x-auto {
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex;
+  }
+
+  .lg\:grid {
+    display: grid;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:flex {
+    display: flex;
+  }
+
+  .xl\:grid {
+    display: grid;
   }
 }
