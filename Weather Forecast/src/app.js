@@ -215,3 +215,45 @@ form.addEventListener("submit", () => {
 
 
 
+//function for dropdown menu 
+    document.addEventListener("DOMContentLoaded", () => {
+        const locationInput = document.getElementById("location");
+        const submitButton = document.getElementById("submit");
+        const cityDropdown = document.getElementById("cityDropdown");
+    
+        // Load cities from local storage
+        const loadCities = () => {
+        const cities = JSON.parse(localStorage.getItem("searchedCities")) || [];
+        cityDropdown.innerHTML = '<option value="select">History:</option>'; // Reset options
+        cities.forEach(city => {
+            const option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            cityDropdown.appendChild(option);
+        });
+        };
+    
+        // Save city to local storage and update the dropdown
+        const saveCity = (city) => {
+        if (!city) return;
+        let cities = JSON.parse(localStorage.getItem("searchedCities")) || [];
+        if (!cities.includes(city)) {
+            cities.push(city);
+            localStorage.setItem("searchedCities", JSON.stringify(cities));
+        }
+        loadCities();//neseccarry to refresh the dropdown 
+        };
+    
+        // Event listener for submit button
+        form.addEventListener("click", () => {
+        const city = locationInput.value.trim();
+        if (city) {
+            saveCity(city);
+            locationInput.value = ""; // Clear input
+        }
+        });
+    
+        // Initial load of cities
+        loadCities();
+    });
+    

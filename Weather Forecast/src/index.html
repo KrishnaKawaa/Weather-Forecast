@@ -43,14 +43,18 @@
     class="rounded-lg col-span-2 row-span-6 row-start-2  p-5 ">
         <form class="flex flex-col my-16">
             <label class="text-2xl " for="location">Enter your Location </label><br>
-
             <input 
             class="p-2 w-auto "
-            id="location" type="text" placeholder="ex:Mumbai,Bengaluru"><br>
+            id="location" type="text" placeholder="ex:Mumbai,London"><br>
+            <!-- Dropdown container -->
+            <div class="relative group">
+                <select id="cityDropdown" class=" relative bottom-4-4 shadow-md">
+                    <option value="select">History:</option>
+                </select>
+            </div><br>
             
             <button id="submit" type="button"
             class="p-2   bg-white shadow-xl transition-colors duration-300 hover:bg-slate-200"> Submit </button>
-            
         </form>
         <hr class="my-16 w-auto border-black">
 
