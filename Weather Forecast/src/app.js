@@ -2,6 +2,7 @@
     const displayBox = document.getElementById("displayBox");
     const coordinates = document.getElementById("coordinates");
     const displayBox2 = document.getElementById("displayBox2"); // New section for 5 days
+    const image=document.getElementById("image");
 
     // Adding Event listener on the form to capture Input
     const form = document.querySelector("form");
@@ -31,9 +32,11 @@ form.addEventListener("submit", () => {
             const longitude = coord.lon;
             const latitude = coord.lat;
             const windSpeed = wind.speed;
+            const icon=weather[0].icon;//weather icon id
+            const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`; // Construct the image URL
 
             displayBox.innerHTML = `
-                <p><strong>City:</strong> ${name}</p>
+                <p><strong>City: ${name}</strong></p>
                 <p><strong>Temperature:</strong> ${temperature}°C</p>
                 <p><strong>Humidity:</strong> ${humidity}%</p>
                 <p><strong>Description:</strong> ${description}</p>
@@ -44,6 +47,8 @@ form.addEventListener("submit", () => {
                 <p>Longitude: ${coord.lon}</p>
                 <p>Latitude: ${coord.lat}</p>
             `;
+            image.innerHTML=`<img class="h-40 w-40" src="${iconUrl}" alt="${description}" >
+            <p><strong>Description:</strong> ${description}</p>`
 
             // Fetching 5-day forecast data
             const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
@@ -63,14 +68,18 @@ form.addEventListener("submit", () => {
                         const humidity = main.humidity;
                         const description = weather[0].description;
                         const windSpeed = wind.speed;
+                        const icon=weather[0].icon;//weather icon id
+            const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`; // Construct the image URL
 
                         // Display forecast in respective div
                         forecastDivs[i].innerHTML = `
-                            <p><strong>${date}</strong></p>
+                            <u><p><strong>${date}</strong></p></u>
                             <p><strong>Temp:</strong> ${temp}°C</p>
-                            <p><strong>Description:</strong> ${description}</p>
                             <p><strong>Humidity:</strong> ${humidity}%</p>
                             <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
+                            <img  src="${iconUrl}" alt="${description}" class=" w-5 h-5 m-0 ">
+                            <p><strong>Description:</strong> ${description}</p>
+
                         `;
                     }
                 })
@@ -134,6 +143,7 @@ form.addEventListener("submit", () => {
                 <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
                 `;
 
+
                 // Fetching 5-day forecast data based on coordinates
                 const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
                 fetch(urlForecast)
@@ -195,3 +205,6 @@ form.addEventListener("submit", () => {
 
     // Attaching event listener to the button
     trackButton.addEventListener("click", getLocation);
+
+
+

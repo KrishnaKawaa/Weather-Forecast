@@ -12,17 +12,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://images.unsplash.com/photo-1705077689363-76d4424a13c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2VhdGhlciUyMGljb258ZW58MHx8MHx8fDA%3D" type="image">
 </head>
 
-<body   style="background-color: black;"
+<body   style="background-color: #041014;"
         class="m-0 p-2 box-border
         grid grid-cols-7 grid-rows-7 gap-4 
-        h-screen">
+        h-screen
+        sm:flex sm:flex-col lg:grid">
 
 
     <header  style="background-color: beige;"
             class="rounded-lg col-span-7  p-5 ">
-        <h1 class="font-bold text-5xl flex justify-center items-center">Weatherly</h1>
+        <h1 class="font-bold text-5xl flex justify-center items-center ">Weatherly🌫</h1>
     </header>
 
 <!-- left section for search bar  -->
@@ -33,33 +35,37 @@
             <label class="text-2xl " for="location">Enter your Location </label><br>
 
             <input 
-            class="p-2 w-96 "
+            class="p-2 w-auto "
             id="location" type="text" placeholder="ex:Mumbai,Bengaluru"><br>
             
             <button id="submit" type="button"
-            class="p-2 my-2  bg-white "> Submit </button>
-            <hr>
+            class="p-2   bg-white shadow-xl transition-colors duration-300 hover:bg-slate-200"> Submit </button>
+            
         </form>
-        <button id="trackLocation" class="p-2 my-2  bg-white w-full"> Use Current Location</button>
+        <hr class="my-16 w-auto border-black">
+
+        <button id="trackLocation" class="p-2  mb-10 bg-white w-full transition-colors duration-300 hover:bg-slate-200"> Use Current Location</button>
         <div id="display" style="background-color: rgba(245, 245, 220, 0.689);" class="p-5 shadow-lg"><p id="coordinates">Coordinates:</p></div>
     </section>
 
 <!-- right box top for display -->
     <section  style="background-color: beige;" 
     class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-2 p-5  grid grid-cols-2 grid-rows-1">
-    <div id="displayBox" class="flex flex-col gap-5 bg-blue-100"></div>
-    <div class="bg-green-200 flex justify-center items-center"><img class="h-40 w-40 " src="https://img.freepik.com/premium-vector/colorful-weather-icon-set-weather-icons-web-forecast-weather-flat-symbols-meteorology-climate-design-elements-isolated-white-backgroundcontains-icons-sun-clouds-rain-moon_646072-215.jpg">
-    </div>
+    <div id="displayBox" class="flex flex-col gap-5 bg-white rounded-l-lg shadow-lg p-5"></div>
+    <div id="image" class=" flex flex-col justify-center items-center rounded-r-lg "style="background-color:  white;">
+        <img class="h-40 w-40 shadow-lg" src="https://i.pinimg.com/736x/96/bf/70/96bf70ba4257d44c967650d415377299.jpg">
+        </div>
     </section>
     
 <!-- right box below for display of n days -->
     <section id="displayBox2" style="background-color: beige;" 
-    class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-5 flex items-center gap-5 p-5" >
-        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3">1</div>
-        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3">2</div>
-        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3">3</div>
-        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3">4</div>
-        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3">5</div>
+    class="rounded-lg col-span-5 row-span-3 col-start-3 row-start-5 flex items-center gap-2 p-5
+    " >
+        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>
+        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>
+        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>
+        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>
+        <div class="h-full bg-white w-full rounded-2xl p-3 flex flex-col gap-3 shadow-lg overflow-x-auto"></div>
     </section>
 
 
