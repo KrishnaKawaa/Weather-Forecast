@@ -5,7 +5,7 @@
 
     // Adding Event listener on the form to capture Input
     const form = document.querySelector("form");
-    form.addEventListener("submit", () => {
+form.addEventListener("submit", () => {
     event.preventDefault(); // To prevent the page from reloading after submit
     const city = document.getElementById("location").value.trim(); // Store the input value
 
@@ -20,67 +20,72 @@
     // Fetching current weather data
     fetch(urlCurrent)
         .then((response) => {
-        if (!response.ok) throw new Error("City not found");
-        return response.json();
+            if (!response.ok) throw new Error("City not found");
+            return response.json();
         })
         .then((data) => {
-        const { main, weather, name, coord, wind } = data;
-        const temperature = main.temp;
-        const humidity = main.humidity;
-        const description = weather[0].description;
-        const longitude = coord.lon;
-        const latitude = coord.lat;
-        const windSpeed = wind.speed;
+            const { main, weather, name, coord, wind } = data;
+            const temperature = main.temp;
+            const humidity = main.humidity;
+            const description = weather[0].description;
+            const longitude = coord.lon;
+            const latitude = coord.lat;
+            const windSpeed = wind.speed;
 
-        displayBox.innerHTML = `
-            <p><strong>City:</strong> ${name}</p>
-            <p><strong>Temperature:</strong> ${temperature}°C</p>
-            <p><strong>Humidity:</strong> ${humidity}%</p>
-            <p><strong>Description:</strong> ${description}</p>
-            <p><strong>Wind:</strong> ${windSpeed} m/s</p>
-        `;
-        coordinates.innerHTML = `
-            <p><strong>Coordinates</strong></p>
-            <p>Longitude: ${coord.lon}</p>
-            <p>Latitude: ${coord.lat}</p>
-        `;
-
-        // Fetching 5-day forecast data
-        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-        fetch(urlForecast)
-            .then((response) => {
-            if (!response.ok) throw new Error("Unable to fetch forecast data");
-            return response.json();
-            })
-            .then((forecastData) => {
-            const forecastDivs = displayBox2.querySelectorAll("div");
-            // Loop through 5 forecast intervals (3 hours apart)
-            for (let i = 0; i < 5; i++) {
-                const forecast = forecastData.list[i * 8]; // 8 data points per day (every 3 hours)
-                const { main, weather, dt_txt } = forecast;
-                const date = new Date(dt_txt).toLocaleDateString();
-                const temp = main.temp;
-                const description = weather[0].description;
-
-                // Display forecast in respective div
-                forecastDivs[i].innerHTML = `
-                <p><strong>${date}</strong></p>
-                <p><strong>Temp:</strong> ${temp}°C</p>
+            displayBox.innerHTML = `
+                <p><strong>City:</strong> ${name}</p>
+                <p><strong>Temperature:</strong> ${temperature}°C</p>
+                <p><strong>Humidity:</strong> ${humidity}%</p>
                 <p><strong>Description:</strong> ${description}</p>
-                `;
-            }
-            })
-            .catch((error) => {
-            console.error(error);
-            displayBox2.innerHTML = "<p>Unable to fetch forecast data.</p>";
-            });
+                <p><strong>Wind:</strong> ${windSpeed} m/s</p>
+            `;
+            coordinates.innerHTML = `
+                <p><strong>Coordinates</strong></p>
+                <p>Longitude: ${coord.lon}</p>
+                <p>Latitude: ${coord.lat}</p>
+            `;
+
+            // Fetching 5-day forecast data
+            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+            fetch(urlForecast)
+                .then((response) => {
+                    if (!response.ok) throw new Error("Unable to fetch forecast data");
+                    return response.json();
+                })
+                .then((forecastData) => {
+                    const forecastDivs = displayBox2.querySelectorAll("div");
+                    // Loop through 5 forecast intervals (3 hours apart)
+                    for (let i = 0; i < 5; i++) {
+                        const forecast = forecastData.list[i * 8]; // 8 data points per day (every 3 hours)
+                        const { main, weather, wind, dt_txt } = forecast;
+                        const date = new Date(dt_txt).toLocaleDateString();
+                        const temp = main.temp;
+                        const humidity = main.humidity;
+                        const description = weather[0].description;
+                        const windSpeed = wind.speed;
+
+                        // Display forecast in respective div
+                        forecastDivs[i].innerHTML = `
+                            <p><strong>${date}</strong></p>
+                            <p><strong>Temp:</strong> ${temp}°C</p>
+                            <p><strong>Description:</strong> ${description}</p>
+                            <p><strong>Humidity:</strong> ${humidity}%</p>
+                            <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
+                        `;
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    displayBox2.innerHTML = "<p>Unable to fetch forecast data.</p>";
+                });
         })
         .catch((error) => {
-        displayBox.textContent = error.message;
-        coordinates.innerHTML = "";
-        displayBox2.innerHTML = ""; // Clear forecast display
+            displayBox.textContent = error.message;
+            coordinates.innerHTML = "";
+            displayBox2.innerHTML = ""; // Clear forecast display
         });
-    });
+});
+
 
     //---------------------Tracking User location---------------------------------------------------------------------------
     // Select elements for tracking
@@ -140,18 +145,22 @@
                     const forecastDivs = displayBox2.querySelectorAll("div");
                     // Loop through 5 forecast intervals (3 hours apart)
                     for (let i = 0; i < 5; i++) {
-                    const forecast = forecastData.list[i * 8]; // 8 data points per day (every 3 hours)
-                    const { main, weather, dt_txt } = forecast;
-                    const date = new Date(dt_txt).toLocaleDateString();
-                    const temp = main.temp;
-                    const description = weather[0].description;
+                        const forecast = forecastData.list[i * 8]; // 8 data points per day (every 3 hours)
+                        const { main, weather, wind, dt_txt } = forecast;
+                        const date = new Date(dt_txt).toLocaleDateString();
+                        const temp = main.temp;
+                        const humidity = main.humidity;
+                        const description = weather[0].description;
+                        const windSpeed = wind.speed;
 
-                    // Display forecast in respective div
-                    forecastDivs[i].innerHTML = `
-                        <p><strong>${date}</strong></p>
-                        <p><strong>Temp:</strong> ${temp}°C</p>
-                        <p><strong>Description:</strong> ${description}</p>
-                    `;
+                        // Display forecast in respective div
+                        forecastDivs[i].innerHTML = `
+                            <p><strong>${date}</strong></p>
+                            <p><strong>Temp:</strong> ${temp}°C</p>
+                            <p><strong>Description:</strong> ${description}</p>
+                            <p><strong>Humidity:</strong> ${humidity}%</p>
+                            <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
+                        `;
                     }
                 })
                 .catch((error) => {
